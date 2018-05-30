@@ -1,4 +1,3 @@
-//helper functions
 // calculate days until duedate
 var calculateDaysLeft = function(formDate) {
     var today = new Date();
@@ -18,7 +17,7 @@ var htmlToDoGenerator = function(listItem,dueDate){
 var focusOnStartingInput = function() {
     $('input')[0].focus();
 }
-// function to remove the dive list item
+// function to remove the completed list item
 var markDone = function() {
     $(this).parent().remove();
     // focus back on todo input after a half second of quiet reflection about the task you have completed
@@ -35,8 +34,8 @@ var addToDo = function(e) {
     var listItem = toDoData[0].value;
     var daysLeftUntilDue = calculateDaysLeft(toDoData[1].value);
     
+    // generate html and append to list div
     var divToAppend = htmlToDoGenerator(listItem, daysLeftUntilDue)
-    // set
     $('.list').append( divToAppend);
 
     // clear out input fields
@@ -52,6 +51,6 @@ var addToDo = function(e) {
 }
 
 $(document).ready(function () {
-    $('input')[0].focus();
+    focusOnStartingInput();
     $('form').submit(addToDo);
 })
