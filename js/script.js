@@ -18,7 +18,9 @@ var calculateDaysLeft = function(formDate) {
 
 //function to generate styled list items
 var htmlToDoGenerator = function(listItem, dueDate){
-    return "<div class='item'> <h3>" + listItem + "</h3><h4>" + dueDate + "</h4><button type='button' class='done'>Done</button><div>";
+    return "<div class='item'> <h3>" + listItem
+           + "</h3><h4>" + dueDate 
+           + "</h4><button type='button' class='done'>Done</button><div>";
 }
 
 //function to refocus -- should this really be wrapped in a func?
