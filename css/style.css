@@ -18,7 +18,10 @@ button {
     margin: 20px auto;
     padding: 10px;
 }
-
+.container {
+    width: 800px;
+    margin: 0 auto;
+}
 .item {
     background: rgb(255, 255, 255, 0.5);
     border: 2px dotted brown;
@@ -26,4 +29,13 @@ button {
     margin: 20px 10px;
     padding: 20px;
 
+}
+
+.list button {
+    width: 80%;
+}
+
+.overdue {
+    color: red;
+    font-weight: bold;
 }

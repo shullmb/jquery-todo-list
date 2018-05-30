@@ -2,15 +2,23 @@
 var calculateDaysLeft = function(formDate) {
     var today = new Date();
     var dueDate = new Date(formDate);
-    
     var numberOfMsInDay = 1000 * 60 * 60 * 24;
+    // find number of days between the two dates
+    var numOfDays = Math.round(((dueDate - today) / numberOfMsInDay));
 
-    return Math.round(((dueDate - today) / numberOfMsInDay));
+    // handle output message
+    if ( numOfDays > 1 || numOfDays === 0) {
+        return numOfDays + " days left to do it!";
+    } else if ( numOfDays == 1 ) {
+        return numOfDays + " day to get it done! hurry up!";
+    } else {
+        return "<span class='overdue'>OVERDUE! Finish this thing!</span>";
+    }
 }
 
 //function to generate styled list items
-var htmlToDoGenerator = function(listItem,dueDate){
-    return "<div class='item'> <h3>" + listItem + "</h3><h4>" + dueDate + "days left to do it </h4><button type='button' class='done'>Done</button><div>";
+var htmlToDoGenerator = function(listItem, dueDate){
+    return "<div class='item'> <h3>" + listItem + "</h3><h4>" + dueDate + "</h4><button type='button' class='done'>Done</button><div>";
 }
 
 //function to refocus -- should this really be wrapped in a func?
