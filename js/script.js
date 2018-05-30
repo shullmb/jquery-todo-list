@@ -1,6 +1,28 @@
+//helper functions
+// calculate days until duedate
+var calculateDaysLeft = function(formDate) {
+    var today = new Date();
+    var dueDate = new Date(formDate);
+    
+    var numberOfMsInDay = 1000 * 60 * 60 * 24;
+
+    return Math.round(((dueDate - today) / numberOfMsInDay));
+}
+
 //function to generate styled list items
 var htmlToDoGenerator = function(listItem,dueDate){
-    return "<div class='item'> <h4>" + listItem+ "<br> due by: " + dueDate+ "</h4><button type='button' class='done'>Done</button><div>";
+    return "<div class='item'> <h3>" + listItem + "</h3><h4>" + dueDate + "days left to do it </h4><button type='button' class='done'>Done</button><div>";
+}
+
+//function to refocus -- should this really be wrapped in a func?
+var focusOnStartingInput = function() {
+    $('input')[0].focus();
+}
+// function to remove the dive list item
+var markDone = function() {
+    $(this).parent().remove();
+    // focus back on todo input after a half second of quiet reflection about the task you have completed
+    setTimeout(focusOnStartingInput, 500);
 }
 
 // function to append list item to body of page
@@ -11,10 +33,9 @@ var addToDo = function(e) {
 
     // set up vars for easier handling
     var listItem = toDoData[0].value;
-    var formDate = toDoData[1].value.split('-');
-    var dueDate = formDate[1] + "/" + formDate[2]+"/"+formDate[0];
+    var daysLeftUntilDue = calculateDaysLeft(toDoData[1].value);
     
-    var divToAppend = htmlToDoGenerator(listItem, dueDate)
+    var divToAppend = htmlToDoGenerator(listItem, daysLeftUntilDue)
     // set
     $('.list').append( divToAppend);
 
@@ -27,11 +48,7 @@ var addToDo = function(e) {
     $('div.item').on("click", "button.done", markDone);
 
     //focus back on 'Thing to do'
-    $('input')[0].focus();
-}
-
-var markDone = function() {
-    $(this).parent().remove();
+    focusOnStartingInput();
 }
 
 $(document).ready(function () {
